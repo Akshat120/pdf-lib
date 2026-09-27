@@ -109,7 +109,7 @@
 - Read viewer preferences
 - Add attachments
 
-> Want to use these features without writing code? Try [**PDF Studio**](apps/studio/), a browser app built on `pdf-lib` (`yarn apps:studio`).
+> Want to use these features without writing code? Try [**PDF Studio**](https://akshat120.github.io/pdf-lib/), a browser app built on `pdf-lib` ([source](apps/studio/)).
 
 ## Motivation
 
@@ -1117,7 +1117,7 @@ There are currently five apps:
 - [**`web`**](apps/web/) - contains [tests](apps/web/) for `pdf-lib` in browser environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` in a browser environment.
 - [**`rn`**](apps/rn) - contains [tests](apps/rn/src/tests/) for `pdf-lib` in React Native environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` in a React Native environment.
 - [**`deno`**](apps/deno) - contains [tests](apps/deno/tests/) for `pdf-lib` in Deno environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` from the filesystem.
-- [**`studio`**](apps/studio/) - **PDF Studio**, a ready-to-use browser app built on `pdf-lib` for merging, organizing, watermarking, filling, annotating and inspecting PDFs without writing any code. Files never leave the browser. Run it with `yarn apps:studio`, or deploy the `apps/studio/` folder to any static host. It's also a handy reference for using `pdf-lib`'s API in a real application.
+- [**`studio`**](apps/studio/) - **PDF Studio**, a ready-to-use browser app built on `pdf-lib` for merging, organizing, watermarking, filling, annotating and inspecting PDFs without writing any code. Files never leave the browser. [Try it live](https://akshat120.github.io/pdf-lib/), run it locally with `yarn apps:studio`, or deploy the `apps/studio/` folder to any static host. It's also a handy reference for using `pdf-lib`'s API in a real application.
 
 ## Installation
 

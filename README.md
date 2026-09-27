@@ -109,6 +109,8 @@
 - Read viewer preferences
 - Add attachments
 
+> Want to use these features without writing code? Try [**PDF Studio**](apps/studio/), a browser app built on `pdf-lib` (`yarn apps:studio`).
+
 ## Motivation
 
 `pdf-lib` was created to address the JavaScript ecosystem's lack of robust support for PDF manipulation (especially for PDF _modification_).
@@ -1109,12 +1111,13 @@ The resulting `out.pdf` file will look like [this PDF](assets/pdfs/examples/embe
 
 The [usage examples](#usage-examples) provide code that is brief and to the point, demonstrating the different features of `pdf-lib`. You can find complete working examples in the [`apps/`](apps/) directory. These apps are used to do manual testing of `pdf-lib` before every release (in addition to the [automated tests](tests/)).
 
-There are currently four apps:
+There are currently five apps:
 
 - [**`node`**](apps/node/) - contains [tests](apps/node/tests/) for `pdf-lib` in Node environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` from the filesystem. They also allow you to quickly open your PDFs in different viewers (Acrobat, Preview, Foxit, Chrome, Firefox, etc...) to ensure compatibility.
 - [**`web`**](apps/web/) - contains [tests](apps/web/) for `pdf-lib` in browser environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` in a browser environment.
 - [**`rn`**](apps/rn) - contains [tests](apps/rn/src/tests/) for `pdf-lib` in React Native environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` in a React Native environment.
 - [**`deno`**](apps/deno) - contains [tests](apps/deno/tests/) for `pdf-lib` in Deno environments. These tests are a handy reference when trying to save/load PDFs, fonts, or images with `pdf-lib` from the filesystem.
+- [**`studio`**](apps/studio/) - **PDF Studio**, a ready-to-use browser app built on `pdf-lib` for merging, organizing, watermarking, filling, annotating and inspecting PDFs without writing any code. Files never leave the browser. Run it with `yarn apps:studio`, or deploy the `apps/studio/` folder to any static host. It's also a handy reference for using `pdf-lib`'s API in a real application.
 
 ## Installation
 

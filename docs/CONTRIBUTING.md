@@ -74,6 +74,7 @@ You can develop `pdf-lib` on Windows, Mac, or Linux machines. While most of the 
 In order to work on `pdf-lib`, please ensure you have installed the following:
 
 - **Node.js** provides the runtime needed to run this project. ([Installation instructions](https://nodejs.org/en/download/) - need `v9.0.0` or greater).
+  > **Note:** Unit tests, linting and type checking work on current Node versions, but [compiling the project](#compiling-the-project) (and therefore the Node integration tests) needs **Node 16.14.0 or older**: the `ttypescript` compiler wrapper crashes on newer releases. The repository includes an `.nvmrc`, so with [nvm](https://github.com/nvm-sh/nvm) you can run `nvm install && nvm use` in the project root to switch to a known-good version.
 - **Yarn** is the package manager used for this project. ([Installation instructions](https://yarnpkg.com/en/docs/install) - need `v1.12.0` or greater).
 - **Git** is the SCM used for this project. ([Installation instructions](https://git-scm.com/downloads) - need `2.17.2` or greater)
 
@@ -147,6 +148,12 @@ There are integration tests for Node, Deno, browser, and React Native environmen
   yarn apps:web
   # Open http://localhost:8080/apps/web/test1.html in your browser
   ```
+- To try the PDF Studio browser app (see [`apps/studio`](../apps/studio/)):
+  ```
+  yarn apps:studio:vendor   # copy the freshly compiled build into the app
+  yarn apps:studio
+  # Opens http://localhost:8080 in your browser
+  ```
 - To run the tests for React Native (iOS):
   ```
   yarn apps:rn:ios
@@ -205,7 +212,7 @@ Compiling the project will produce 4 artifacts:
 - **`compiled/dist/pdf-lib.js`** - a single JavaScript file containing a [UMD](https://www.davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) version of the project.
 - **`compiled/dist/pdf-lib.min.js`** - a single JavaScript file containing a minified [UMD](https://www.davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) version of the project.
 
-To compile the project, execute the following:
+To compile the project, execute the following (with Node 16.14.0 — run `nvm use` first if you use nvm; see [Local Setup](#local-setup-and-prerequisites)):
 
 ```
 yarn build

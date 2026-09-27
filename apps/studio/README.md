@@ -4,6 +4,8 @@ A free, browser-based toolkit for everyday PDF tasks, built on
 [pdf-lib](https://pdf-lib.js.org). Everything runs locally in the browser —
 files are never uploaded anywhere.
 
+**Live app: <https://akshat120.github.io/pdf-lib/>**
+
 ## Features
 
 | Tool                  | What it does                                                                                  |
@@ -30,9 +32,15 @@ browser. The folder is fully static, so any web server works, e.g.
 
 ## Deploying
 
-Copy the contents of `apps/studio/` to any static host (GitHub Pages,
-Netlify, S3, an nginx folder, …). There is no build step and no server-side
-code.
+The live site is deployed automatically: every push to `master` that touches
+`apps/studio/` runs the
+[`Deploy PDF Studio to GitHub Pages`](../../.github/workflows/deploy-studio.yml)
+workflow, which publishes this folder to GitHub Pages. You can also start it
+by hand from the repository's **Actions** tab.
+
+To host it somewhere else, copy the contents of `apps/studio/` to any static
+host (Netlify, S3, an nginx folder, …). There is no build step and no
+server-side code.
 
 ```
 apps/studio/

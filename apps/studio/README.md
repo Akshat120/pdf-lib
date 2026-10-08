@@ -10,7 +10,7 @@ files are never uploaded anywhere.
 
 | Tool                  | What it does                                                                                  |
 | --------------------- | --------------------------------------------------------------------------------------------- |
-| **Merge PDFs**        | Combine several PDFs into one, in any order                                                   |
+| **Merge PDFs**        | Combine several PDFs into one, in any order, rotating each file's pages as needed             |
 | **Organize pages**    | Reorder (drag or Shift + ←/→), rotate, delete, or extract pages by selection or range         |
 | **Add text & images** | Click (or use the arrow keys) to place text or an image on any page, with undo                |
 | **Watermark**         | Stamp centered, rotated, semi-transparent text on all or some pages                           |

@@ -254,7 +254,8 @@
   window.addEventListener('dragover', (e) => e.preventDefault());
   window.addEventListener('drop', (e) => e.preventDefault());
 
-  /** A numbered list with move up / move down / remove buttons. */
+  /** A numbered list with move up / move down / remove buttons. Items that
+   *  carry a `rot` (degrees) also get rotate left / right buttons. */
   function renderFileList(ul, items, redraw, describe) {
     ul.innerHTML = '';
     items.forEach((item, i) => {
@@ -267,12 +268,30 @@
           'li',
           { class: 'fileitem' },
           el('span', { class: 'idx', 'aria-hidden': 'true' }, i + 1),
-          item.thumbUrl && el('img', { src: item.thumbUrl, alt: '' }),
+          item.thumbUrl &&
+            el('img', {
+              src: item.thumbUrl,
+              alt: '',
+              class: 'rot' in item && 'pagethumb',
+              style: item.rot && `transform:rotate(${item.rot}deg)`,
+            }),
           el('span', { class: 'fname', title: item.name }, item.name),
           el('span', { class: 'muted small' }, describe(item)),
           el(
             'span',
             { class: 'row-actions' },
+            'rot' in item &&
+              iconBtn(
+                '↺',
+                `Rotate ${item.name} left`,
+                () => ((item.rot -= 90), redraw()),
+              ),
+            'rot' in item &&
+              iconBtn(
+                '↻',
+                `Rotate ${item.name} right`,
+                () => ((item.rot += 90), redraw()),
+              ),
             iconBtn('↑', `Move ${item.name} up`, () => move(i - 1), i === 0),
             iconBtn(
               '↓',
@@ -450,7 +469,24 @@
       try {
         const bytes = await readFile(file);
         const doc = await loadPdf(bytes);
-        merge.files.push({ name: file.name, bytes, pages: doc.getPageCount() });
+        const item = {
+          name: file.name,
+          bytes,
+          pages: doc.getPageCount(),
+          rot: 0,
+        };
+        merge.files.push(item);
+        // Draw the first page in the background so rotation is visible in the list.
+        if (pdfjs) {
+          (async () => {
+            const pdf = await openForView(bytes);
+            const canvas = el('canvas');
+            await renderPage(pdf, 1, canvas, { fit: 68 });
+            pdf.destroy();
+            item.thumbUrl = canvas.toDataURL();
+            if (merge.files.includes(item)) drawMerge();
+          })().catch((e) => console.error(e));
+        }
       } catch (e) {
         toast(`${file.name}: ${e.message}`, 'error');
       }
@@ -460,8 +496,13 @@
 
   function drawMerge() {
     const { files } = merge;
-    renderFileList($('#merge-list'), files, drawMerge, (f) =>
-      plural(f.pages, 'page'),
+    renderFileList(
+      $('#merge-list'),
+      files,
+      drawMerge,
+      (f) =>
+        plural(f.pages, 'page') +
+        (norm360(f.rot) ? ` · rotated ${norm360(f.rot)}°` : ''),
     );
     const total = files.reduce((sum, f) => sum + f.pages, 0);
     $('#merge-summary').textContent = !files.length
@@ -484,7 +525,11 @@
       for (const file of merge.files) {
         const src = await loadPdf(file.bytes);
         const pages = await out.copyPages(src, src.getPageIndices());
-        pages.forEach((p) => out.addPage(p));
+        const rot = norm360(file.rot);
+        pages.forEach((p) => {
+          if (rot) p.setRotation(degrees(norm360(p.getRotation().angle + rot)));
+          out.addPage(p);
+        });
       }
       await showResult(await out.save(), 'merged.pdf');
     }),
